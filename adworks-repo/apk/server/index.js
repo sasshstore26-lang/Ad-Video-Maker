@@ -60,7 +60,7 @@ app.post("/generate-ad-script", async (req, res) => {
 
          try {
            const message = await anthropic.messages.create({
-             model: "claude-sonnet-4-5",
+             model: "claude-sonnet-5",
              max_tokens: 1400,
              messages: [{ role: "user", content: prompt }],
            });
