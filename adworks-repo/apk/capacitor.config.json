@@ -1,0 +1,22 @@
+{
+  "appId": "com.adworks.adstudio",
+  "appName": "Adworks",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#f2f2f3"
+  },
+  "plugins": {
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#f2f2f3",
+      "overlaysWebView": true
+    },
+    "SplashScreen": {
+      "backgroundColor": "#1d2d3d",
+      "launchAutoHide": true,
+      "launchShowDuration": 600
+    }
+  }
+}
