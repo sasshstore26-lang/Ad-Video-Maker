@@ -938,7 +938,8 @@ class Component extends DCLogic {
 
   componentWillUnmount(){clearInterval(this._iv)}
   runGen=()=>{clearInterval(this._iv);this.setState({screen:'generating',progress:0});
-    this._iv=setInterval(()=>{const p=this.state.progress+2;if(p>=100){clearInterval(this._iv);this.setState({progress:100,screen:'editor'})}else this.setState({progress:p})},70)}
+    this._iv=setInterval(()=>{const p=this.state.progress+2;if(p>=100){clearInterval(this._iv);this.setState({progress:100})}else{this.setState({progress:p})}},70);const up=this.state.prompt||'';Promise.resolve().then(()=>window.claude.complete({messages:[{content:up}]})).then(txt=>{const ln=String(txt||'').split('
+').map(x=>x.replace(/^#+\s*/,'').trim()).find(x=>x)||'';this.setState({aiCaption:ln.slice(0,70),screen:'editor'})}).catch(()=>{this.setState({screen:'editor'})})}
   set=(k,v)=>()=>this.setState({[k]:v});
 
   renderVals(){
@@ -977,7 +978,7 @@ class Component extends DCLogic {
         diamond:{width:11,height:11,flex:'none',transform:'rotate(45deg)',border:'1px solid '+(i<2?ACC:'rgba(29,31,32,.28)'),background:i<2?ACC:'transparent',cursor:'pointer'}};
     });
 
-    const capText={Kinetic:'KEEPS COFFEE HOT FOR 12 HOURS',Subtitle:'Keeps coffee hot for 12 hours',Boxed:'12 HOURS HOT',Minimal:'12 hours hot'}[s.cap];
+    const capText=s.aiCaption||({Kinetic:'KEEPS COFFEE HOT FOR 12 HOURS',Subtitle:'Keeps coffee hot for 12 hours',Boxed:'12 HOURS HOT',Minimal:'12 hours hot'}[s.cap]);
     const capBase={display:'inline-block',fontFamily:'"Barlow Condensed",sans-serif',color:'#f2f2f3',textWrap:'balance'};
     const capBox={Kinetic:{...capBase,fontSize:29,lineHeight:1.02,letterSpacing:'.01em',textShadow:'0 2px 10px rgba(0,0,0,.5)'},
       Subtitle:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:17,background:'rgba(29,45,61,.75)',padding:'5px 10px'},
