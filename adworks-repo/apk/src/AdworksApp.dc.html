@@ -30,7 +30,6 @@ body{margin:0;background:#f2f2f3}
 </helmet>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1d2d3d"/><rect x="60" y="60" width="80" height="80" fill="none" stroke="#94bce3" stroke-width="3"/><path d="M88 82 L124 100 L88 118 Z" fill="#94bce3"/></svg></template>
 
-
 <div style="position:fixed;inset:0;overflow:hidden;background:var(--color-bg)">
       <div style="height:100%;display:flex;flex-direction:column;background:var(--color-bg);font-family:var(--font-body)">
 
@@ -304,7 +303,7 @@ body{margin:0;background:#f2f2f3}
         </sc-if>
 
         <sc-if value="{{ isGenerating }}" hint-placeholder-val="{{ false }}">
-          <div style="flex:1;background:var(--color-accent-900);color:var(--color-bg);display:flex;flex-direction:column;padding:74px 22px 34px">
+          <div style="flex:1;background:var(--color-accent-900);color:var(--color-bg);display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,20px) + 34px) 22px 34px">
             <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.6">Assembling &mdash; Nordvik Thermal Flask</div>
             <div class="blueprint duotone" style="{{ genStill }}"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i></div>
             <div style="display:flex;align-items:flex-end;gap:7px;margin-top:26px">
@@ -904,5 +903,301 @@ body{margin:0;background:#f2f2f3}
 </div>
 
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Adworks&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showMarks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const ACC='#5980a6', DEEP='#1d2d3d', INK='#1d1f20';
+const chip=(on,extra)=>Object.assign({padding:'7px 11px',fontSize:12,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.04em',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?ACC:'transparent',color:on?'#f2f2f3':INK},extra||{});
+const segOpt=(on)=>({flex:1,textAlign:'center',padding:'9px 4px',fontSize:12.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.04em',cursor:'pointer',background:on?ACC:'transparent',color:on?'#f2f2f3':INK,borderRight:'0'});
 
+const SHOTS=['assets/shot-1-lid.jpeg','assets/shot-2-hand.jpeg','assets/shot-3-steam.jpeg','assets/shot-4-interior.jpeg','assets/shot-5-podium.jpeg'];
+const SCREENS=[['onboard','Onboarding'],['home','Home / projects'],['create','Create'],['generating','Generating'],['editor','Editor'],['export','Export'],['publish','Publish'],['paywall','What\u2019s included'],['analytics','Analytics'],['assets','Assets'],['team','Team & approvals']];
 
+class Component extends DCLogic {
+  state={screen:'home',src:'url',goal:'Conversions',dur:'15s',ratio:'9:16',avatar:true,
+    url:'nordvik.com/thermal-flask',prompt:'A 15-second ad for an insulated flask, shot cold-morning, ending on the price.',
+    tone:'Plain-spoken',progress:0,playing:false,t:6.2,layer:'caption',tool:'props',cap:'Kinetic',
+    voice:'Nora',line:2,hooks:['A','B','C'],expRatios:['9:16','1:1'],prop:'Scale',
+    channels:['Meta','TikTok'],schedule:'Now',budget:25,plan:'Everything',tlMode:'stack',clip:2,createMode:'sheet',iStep:1,connectFor:null,connectStep:0,connected:[],adAccount:'Nordvik AB — main',
+    clipLens:[2.6,3.4,4.2,2.4,2.4],keyMap:{avatar:[.06,.2],caption:[.1,.42,.66,.88],logo:[.76,.94]},fault:'none',workspace:'Nordvik AB'};
+
+  total=()=>this.state.clipLens.reduce((a,b)=>a+b,0);
+  keyDown=(id,i)=>e=>{e.stopPropagation();e.target.setPointerCapture(e.pointerId);
+    this._kd={rect:e.target.parentNode.getBoundingClientRect(),id,i};this.setState({layer:id})};
+  keyMove=e=>{if(!this._kd)return;e.stopPropagation();const{rect,id,i}=this._kd;
+    const f=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+    const km={...this.state.keyMap};km[id]=km[id].map((v,j)=>j===i?f:v);
+    this.setState({keyMap:km,t:+(f*this.total()).toFixed(1)})};
+  keyUp=()=>{this._kd=null};
+  trimDown=(i)=>e=>{e.stopPropagation();e.target.setPointerCapture(e.pointerId);
+    this._td={rect:e.target.closest('[data-strip]').getBoundingClientRect(),i,start:e.clientX,len:this.state.clipLens[i]};
+    this.setState({clip:i})};
+  trimMove=e=>{if(!this._td)return;e.stopPropagation();const{rect,i,start,len}=this._td;
+    const next=Math.max(0.8,Math.min(8,+(len+(e.clientX-start)*(this.total()/rect.width)).toFixed(1)));
+    const cl=this.state.clipLens.slice();cl[i]=next;this.setState({clipLens:cl})};
+  trimUp=()=>{this._td=null};
+
+  componentWillUnmount(){clearInterval(this._iv)}
+  runGen=()=>{clearInterval(this._iv);this.setState({screen:'generating',progress:0});
+    this._iv=setInterval(()=>{const p=this.state.progress+2;if(p>=100){clearInterval(this._iv);this.setState({progress:100,screen:'editor'})}else this.setState({progress:p})},70)}
+  set=(k,v)=>()=>this.setState({[k]:v});
+
+  renderVals(){
+    const s=this.state, dur=this.total(), t=Math.min(s.t,dur);
+    const brandName=this.props.brandName??'Adworks';
+    const marks=this.props.showMarks!==false;
+    const tc=(x)=>'0:'+String(Math.floor(x)).padStart(2,'0')+'.'+String(Math.round((x%1)*10));
+    const scene=Math.min(5,Math.floor(t/3)+1);
+
+    const clipStart=s.clipLens.slice(0,s.clip).reduce((a,b)=>a+b,0);
+    const layerDefs=[
+      {id:'scene',name:'Scene 0'+(s.clip+1),meta:'GENERATED CLIP · '+s.clipLens[s.clip].toFixed(1)+'s',start:clipStart/dur,len:s.clipLens[s.clip]/dur,keys:[]},
+      {id:'avatar',name:'Avatar',meta:'PRESENTER · HOOK LINE',start:0,len:.28,keys:s.keyMap.avatar},
+      {id:'caption',name:'Caption',meta:'KINETIC · WORD REVEAL',start:.06,len:.9,keys:s.keyMap.caption},
+      {id:'logo',name:'Logo',meta:'CORNER · 0.4 OPACITY',start:.72,len:.28,keys:s.keyMap.logo},
+      {id:'audio',name:'VO + Mus',meta:'NORA 96 WPM · MUSIC 24%',start:0,len:1,keys:[]}
+    ];
+    const layers=layerDefs.map(l=>{
+      const on=s.layer===l.id;
+      return {name:l.name,meta:l.meta,
+        labelStyle:{width:70,flex:'none',fontSize:9,letterSpacing:'.07em',textTransform:'uppercase',lineHeight:'24px',padding:'0 5px',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.14)':'transparent',color:INK,whiteSpace:'nowrap',overflow:'hidden'},
+        trackStyle:{flex:1,height:24,position:'relative',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),cursor:'pointer',overflow:'hidden'},
+        fillStyle:{position:'absolute',top:0,bottom:0,left:(l.start*100)+'%',width:(l.len*100)+'%',background:on?'rgba(89,128,166,.22)':'rgba(29,31,32,.05)',borderLeft:'2px solid '+(on?ACC:'rgba(29,31,32,.25)')},
+        onSelect:this.set('layer',l.id),
+        keys:l.keys.map((k,i)=>({style:{position:'absolute',left:'calc('+(k*100)+'% - 6px)',top:6,width:12,height:12,transform:'rotate(45deg)',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'#f2f2f3',cursor:'ew-resize',touchAction:'none'},
+          onPointerDown:this.keyDown(l.id,i),onPointerMove:this.keyMove,onPointerUp:this.keyUp}))};
+    });
+    const selLayer=layerDefs.find(l=>l.id===s.layer)||layerDefs[2];
+
+    const propRows=[{name:'Position',v:'x 0 · y −64'},{name:'Scale',v:'104%'},{name:'Opacity',v:'100%'},{name:'Blur',v:'0.0'}];
+    const props=propRows.map((p,i)=>{
+      const frac=[0.5,0.62,1,0.04][i];
+      return {name:p.name,value:p.v,
+        fill:{position:'absolute',left:0,top:0,bottom:0,width:(frac*100)+'%',background:ACC},
+        knob:{position:'absolute',left:'calc('+(frac*100)+'% - 6px)',top:-5,width:12,height:12,background:'#f2f2f3',border:'1px solid '+ACC},
+        diamond:{width:11,height:11,flex:'none',transform:'rotate(45deg)',border:'1px solid '+(i<2?ACC:'rgba(29,31,32,.28)'),background:i<2?ACC:'transparent',cursor:'pointer'}};
+    });
+
+    const capText={Kinetic:'KEEPS COFFEE HOT FOR 12 HOURS',Subtitle:'Keeps coffee hot for 12 hours',Boxed:'12 HOURS HOT',Minimal:'12 hours hot'}[s.cap];
+    const capBase={display:'inline-block',fontFamily:'"Barlow Condensed",sans-serif',color:'#f2f2f3',textWrap:'balance'};
+    const capBox={Kinetic:{...capBase,fontSize:29,lineHeight:1.02,letterSpacing:'.01em',textShadow:'0 2px 10px rgba(0,0,0,.5)'},
+      Subtitle:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:17,background:'rgba(29,45,61,.75)',padding:'5px 10px'},
+      Boxed:{...capBase,fontSize:26,background:ACC,padding:'6px 12px'},
+      Minimal:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:15,letterSpacing:'.14em',textTransform:'uppercase',opacity:.9}}[s.cap];
+
+    const scriptLines=[['0:00','Cold morning. Long ride.'],['0:03','Most flasks give up by nine.'],['0:06','Keeps coffee hot for 12 hours.'],['0:10','Steel body, one-hand lid.'],['0:13','Nordvik Thermal Flask — €38.']];
+
+    return {
+      brandName, deviceW:402, deviceH:874,
+      shotStyle:(p,extra)=>Object.assign({backgroundImage:'url("'+p+'")',backgroundSize:'cover',backgroundPosition:'center'},extra||{}),
+      sceneImg:{backgroundImage:'url("'+SHOTS[s.clip]+'")',backgroundSize:'cover',backgroundPosition:'center',position:'absolute',inset:0},
+      logoImg:{position:'absolute',inset:0,backgroundImage:'url("assets/app-mark.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+      genStill:{height:150,margin:'22px 0 0',position:'relative',backgroundImage:'url("assets/shot-3-steam.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+      footageGrid:SHOTS.concat(['assets/shot-2-hand.jpeg','assets/shot-3-steam.jpeg']).slice(0,7).map(p=>({style:{aspectRatio:'1',backgroundImage:'url("'+p+'")',backgroundSize:'cover',backgroundPosition:'center'}})),
+      heroThumb:{width:50,height:50,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("assets/shot-5-podium.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+      faults:[['none','Happy path'],['firstRun','First run — empty'],['urlError','URL unreadable'],['renderFail','Render failed'],['disconnected','Account disconnected']]
+        .map(([id,label])=>({label,style:chip(s.fault===id,{fontSize:11,padding:'5px 8px'}),onPick:()=>this.setState({fault:id,screen:id==='firstRun'?'home':id==='urlError'?'create':id==='renderFail'?'export':id==='disconnected'?'publish':s.screen})})),
+      isFirstRun:s.fault==='firstRun',isUrlError:s.fault==='urlError',isRenderFail:s.fault==='renderFail',isDisconnected:s.fault==='disconnected',
+      urlOk:s.fault!=='urlError',hasProjects:s.fault!=='firstRun',
+      retry:()=>this.setState({fault:'none'}),
+      useClips:()=>this.setState({fault:'none',src:'photos'}),
+      usePrompt:()=>this.setState({fault:'none',src:'prompt'}),
+      relink:()=>this.setState({fault:'none',connectFor:'Meta',connectStep:0}),
+      durLabel:dur.toFixed(0)+'s',
+      screenLabel:(SCREENS.find(x=>x[0]===s.screen)||['','' ])[1],
+      isOnboard:s.screen==='onboard',isHome:s.screen==='home',isCreate:s.screen==='create',
+      isGenerating:s.screen==='generating',isEditor:s.screen==='editor',isExport:s.screen==='export',isAnalytics:s.screen==='analytics',
+      isPublish:s.screen==='publish',isPaywall:s.screen==='paywall',isAssets:s.screen==='assets',
+      goAssets:this.set('screen','assets'),goTeam:this.set('screen','team'),isTeam:s.screen==='team',
+      workspaces:[['Nordvik AB','Own brand','4 live · 2 drafts',true],['Bike Club','Client · approval required','1 live · 1 waiting',false],['Fjell Coffee','Client · approval required','0 live · 3 drafts',false]]
+        .map(([name,role,meta,own])=>{
+          const on=s.workspace===name;
+          return {name,role,meta,onPick:this.set('workspace',name),
+            style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+            markStyle:{width:26,height:26,flex:'none',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),position:'relative',background:own?ACC:'transparent'}};
+        }),
+      seats:[['Mari H.','Owner','Everything, including billing'],['Jonas P.','Editor','Create and edit, cannot publish'],['Bike Club','Reviewer','Comments and approvals only'],['+ Invite','','Editor or reviewer, per workspace']]
+        .map(([name,role,scope])=>({name,role,scope,
+          style:{display:'flex',alignItems:'center',gap:10,padding:'9px 2px',borderBottom:'1px solid rgba(29,31,32,.08)',fontSize:12.5,cursor:'pointer'},
+          roleStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',textTransform:'uppercase',color:role==='Owner'?'#41617f':'rgba(29,31,32,.5)'}})),
+      approvals:[['Bike Club — winter promo','Waiting on client · 2 days','shot-2-hand',true],['Fjell Coffee — bag refresh','Changes requested: swap the hook','shot-3-steam',false]]
+        .map(([title,note,img,pending])=>({title,note,pending,
+          thumbStyle:{width:44,height:58,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("assets/'+img+'.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+          tagStyle:{fontSize:9.5,letterSpacing:'.08em',padding:'3px 8px',border:'1px solid '+(pending?ACC:'rgba(29,31,32,.25)'),color:pending?'#41617f':'rgba(29,31,32,.6)'},
+          tagLabel:pending?'PENDING':'CHANGES',
+          onOpen:this.set('screen','editor')})),
+      tlModes:[['stack','LAYERS'],['strip','FILMSTRIP']].map(([id,label])=>({label,style:{padding:'4px 8px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.tlMode===id?ACC:'rgba(29,31,32,.16)'),background:s.tlMode===id?ACC:'transparent',color:s.tlMode===id?'#f2f2f3':INK},onPick:this.set('tlMode',id)})),
+      tlIsStack:s.tlMode==='stack',tlIsStrip:s.tlMode==='strip',
+      stripTotal:dur.toFixed(1)+'s total',
+      strip:['Cold open','Problem','Demo','Proof','Price card'].map((label,i)=>{
+        const len=s.clipLens[i], on=s.clip===i, st=s.clipLens.slice(0,i).reduce((a,b)=>a+b,0);
+        return {label,durLabel:len.toFixed(1)+'s',
+          imgStyle:{position:'absolute',inset:0,backgroundImage:'url("'+SHOTS[i]+'")',backgroundSize:'cover',backgroundPosition:'center',opacity:on?1:.6},
+          style:{flex:len,height:58,position:'relative',cursor:'pointer',display:'flex',flexDirection:'column',overflow:'hidden',minWidth:0,border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),borderLeftWidth:on?3:1},
+          handleStyle:{position:'absolute',right:0,top:0,bottom:0,width:12,cursor:'ew-resize',touchAction:'none',borderRight:'3px solid '+(on?ACC:'rgba(29,31,32,.3)')},
+          onPointerDown:this.trimDown(i),onPointerMove:this.trimMove,onPointerUp:this.trimUp,
+          onSelect:()=>this.setState({clip:i,t:+(st+0.4).toFixed(1)})};
+      }),
+      stripChips:[['caption','CAPTION'],['avatar','AVATAR'],['logo','LOGO'],['audio','VO + MUSIC']].map(([id,label])=>({label,
+        style:{padding:'5px 10px',fontSize:10,letterSpacing:'.06em',fontFamily:'"Barlow Condensed",sans-serif',cursor:'pointer',border:'1px solid '+(s.layer===id?ACC:'rgba(29,31,32,.16)'),background:s.layer===id?'rgba(89,128,166,.14)':'transparent'},onPick:this.set('layer',id)})),
+      assetGroups:[['Brand kit','Logo, palette, type and the tone of voice every ad inherits.',['Nordvik logo — SVG','Steel / paper palette','Barlow Condensed + Barlow','Tone: plain-spoken']],
+                   ['Footage','Clips and stills you uploaded, plus scenes we generated.',['12 product stills','5 generated scenes','2 phone clips','B-roll: winter, cycling']],
+                   ['Voice & music','Approved voices and licensed tracks.',['Nora — house voice','Iver, Sana','Cold Front — percussive','3 more tracks']]]
+        .map(([title,note,items])=>({title,note,items:items.map(t=>({text:t}))})),
+      goPublish:this.set('screen','publish'),goPaywall:this.set('screen','paywall'),
+      channels:[['Meta','Instagram Reels + Facebook feed','connected'],['TikTok','Ads Manager · Nordvik AB','connected'],['YouTube','Shorts','connect'],['Download','Files on this phone','ready']].map(([name,desc,st])=>{
+        const on=s.channels.includes(name), needs=st==='connect'&&!s.connected.includes(name);
+        return {name,desc:needs?desc:(s.connected.includes(name)?'Brand account · Nordvik AB':desc),state:needs?'CONNECT':on?'SELECTED':'OFF',
+          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
+          mark:on?'✓':'',tagStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',color:st==='connect'?ACC:'rgba(29,31,32,.5)'},
+          onPick:()=>needs?this.setState({connectFor:name,connectStep:0})
+            :this.setState({channels:on?s.channels.filter(x=>x!==name):s.channels.concat(name)})};
+      }),
+      connectOpen:!!s.connectFor,connectFor:s.connectFor,
+      connectStep:s.connectStep,
+      connectIsAuth:s.connectStep===0,connectIsAccount:s.connectStep===1,connectIsDone:s.connectStep===2,
+      connectTitle:s.connectStep===0?('Connect '+s.connectFor):s.connectStep===1?'Pick the ad account':(s.connectFor+' connected'),
+      scopes:[['Read your ad accounts','so we can list where to publish'],['Create and pause ads','so variants can be launched and stopped'],['Read performance','so the analytics screen can report CTR and cost']].map(([t,w])=>({t,w})),
+      adAccounts:[['Nordvik AB — main','act_884120','€2,140 spent · 30d'],['Nordvik AB — test','act_884121','€0 spent · 30d'],['Bike Club (agency)','act_771904','€612 spent · 30d']].map(([name,id,meta])=>{
+        const on=s.adAccount===name;
+        return {name,id,meta,onPick:this.set('adAccount',name),
+          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+          dotStyle:{width:14,height:14,flex:'none',borderRadius:'50%',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),boxShadow:on?'inset 0 0 0 3px #f2f2f3':'none',background:on?ACC:'transparent'}};
+      }),
+      connectCta:s.connectStep===0?'ALLOW ACCESS':s.connectStep===1?'USE THIS ACCOUNT':'DONE',
+      connectNext:()=>{if(s.connectStep<2)this.setState({connectStep:s.connectStep+1});
+        else this.setState({connected:s.connected.concat(s.connectFor),channels:s.channels.concat(s.connectFor),connectFor:null})},
+      connectClose:()=>this.setState({connectFor:null}),
+      schedule:['Now','Tonight 18:00','Pick a date'].map(x=>({label:x,style:segOpt(s.schedule===x),onPick:this.set('schedule',x)})),
+      budgetLabel:'€'+s.budget+' / day',
+      budgetFill:{position:'absolute',left:0,top:0,bottom:0,width:((s.budget-5)/95*100)+'%',background:ACC},
+      budgetKnob:{position:'absolute',left:'calc('+((s.budget-5)/95*100)+'% - 7px)',top:-6,width:14,height:14,background:'#f2f2f3',border:'1px solid '+ACC,cursor:'pointer'},
+      onBudget:e=>{const r=e.currentTarget.getBoundingClientRect();this.setState({budget:Math.max(5,Math.min(100,Math.round((e.clientX-r.left)/r.width*95+5)))})},
+      publishSummary:s.channels.length+' channel'+(s.channels.length===1?'':'s')+' · '+(s.expRatios.length*s.hooks.length)+' files · €'+s.budget+'/day',
+      plans:[['Everything','Free','Unlimited renders · 1080p · no watermark',['Unlimited brand kits','Every ratio + hook variants','Avatar presenter and voices','Publish to Meta, TikTok & YouTube','Performance reporting']]]
+        .map(([name,price,line,feats])=>{
+          const on=s.plan===name;
+          return {name,price,line,onPick:this.set('plan',name),
+            style:{padding:14,cursor:'pointer',position:'relative',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.08)':'transparent'},
+            nameStyle:{fontFamily:'"Barlow Condensed",sans-serif',fontSize:19,color:on?'#41617f':INK},
+            feats:feats.map(f=>({text:f}))};
+        }),
+      planCta:'KEEP GOING',
+      screenNav:SCREENS.map(([id,label])=>({label,style:chip(s.screen===id,{fontSize:11.5,padding:'6px 9px'}),onPick:this.set('screen',id)})),
+      prevScreen:()=>{const i=SCREENS.findIndex(x=>x[0]===s.screen);this.setState({screen:SCREENS[(i-1+SCREENS.length)%SCREENS.length][0]})},
+      nextScreen:()=>{const i=SCREENS.findIndex(x=>x[0]===s.screen);this.setState({screen:SCREENS[(i+1)%SCREENS.length][0]})},
+      goHome:this.set('screen','home'),goCreate:this.set('screen','create'),goEditor:this.set('screen','editor'),
+      goExport:this.set('screen','export'),goAnalytics:this.set('screen','analytics'),startGenerate:this.runGen,
+
+      tones:['Plain-spoken','Technical','Warm','Blunt'].map(x=>({label:x,style:chip(s.tone===x),onPick:this.set('tone',x)})),
+      projects:[['Thermal Tumbler — cut 01','9:16','0:15','LIVE · 3 VARIANTS','2h ago','assets/shot-5-podium.jpeg'],['Tumbler — commuter angle','1:1','0:20','DRAFT','yesterday','assets/shot-2-hand.jpeg'],['Lid & seal detail','9:16','0:12','RENDERING','2 days','assets/shot-1-lid.jpeg'],['Tumbler — gift angle','16:9','0:30','LIVE','5 days','assets/shot-3-steam.jpeg']]
+        .map(([title,ratio,dur2,status,when,img])=>({title,ratio,dur:dur2,status,when,
+          thumbStyle:{aspectRatio:'9/16',position:'relative',display:'flex',alignItems:'flex-end',padding:8,backgroundImage:'url("'+img+'")',backgroundSize:'cover',backgroundPosition:'center'},
+          onOpen:this.set('screen','editor')})),
+      liveAds:[['Flask — B','€212','€9.40','best'],['Flask — A','€188','€13.10',''],['Gloves — A','€96','€11.80','']]
+        .map(([name,spend,cpp,flag])=>({name,spend,cpp,
+          style:{display:'flex',alignItems:'center',gap:9,padding:'7px 0',borderBottom:'1px solid rgba(29,31,32,.08)',cursor:'pointer',fontSize:12.5},
+          nameStyle:{fontFamily:'"Barlow Condensed",sans-serif',fontSize:14,color:flag?'#41617f':INK},
+          cppStyle:{marginLeft:'auto',fontFamily:'"Barlow Condensed",sans-serif',fontSize:14,color:flag?ACC:INK},
+          onOpen:this.set('screen','analytics')})),
+      tabs:[['PROJECTS','sq'],['CREATE','ci'],['ASSETS','di']].map(([label,g],i)=>({label,
+        style:{flex:1,height:44,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3,cursor:'pointer',color:i===0?ACC:INK,opacity:i===0?1:.45},
+        glyph:{width:15,height:15,border:'1.5px solid currentColor',borderRadius:g==='ci'?'50%':0,transform:g==='di'?'rotate(45deg)':'none'},
+        onPick:i===1?this.set('screen','create'):i===2?this.set('screen','assets'):this.set('screen','home')})),
+
+      createModes:[['sheet','ONE SHEET'],['interview','INTERVIEW']].map(([id,label])=>({label,
+        style:{padding:'5px 9px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.createMode===id?ACC:'rgba(29,31,32,.16)'),background:s.createMode===id?ACC:'transparent',color:s.createMode===id?'#f2f2f3':INK},onPick:this.set('createMode',id)})),
+      modeIsSheet:s.createMode==='sheet',modeIsInterview:s.createMode==='interview',
+      iq:(()=>{const qs=[['What are we advertising?','Nordvik Thermal Flask 750ml — insulated steel, one-hand lid, €38.'],
+        ['Who is buying it, and what stops them?','Winter commuters on bikes. They think €38 is a lot for a flask.'],
+        ['What is the one promise?','Coffee still hot 12 hours later — measured, not claimed.'],
+        ['What proof can we show?','412 reviews at 4.8, and a pour shot with steam at hour twelve.']][s.iStep];
+        return {n:'0'+(s.iStep+1),of:'/ 04',q:qs[0],a:qs[1]}})(),
+      iBars:[0,1,2,3].map(i=>({style:{flex:1,height:2,background:i<=s.iStep?ACC:'rgba(29,31,32,.16)'}})),
+      iNext:()=>s.iStep<3?this.setState({iStep:s.iStep+1}):this.runGen(),
+      iBack:()=>s.iStep>0?this.setState({iStep:s.iStep-1}):this.setState({createMode:'sheet'}),
+      iNextLabel:s.iStep<3?'NEXT':'WRITE THE SCRIPT',
+      sources:[['url','PRODUCT URL'],['photos','MY CLIPS'],['prompt','PROMPT']].map(([id,label])=>({label,style:segOpt(s.src===id),onPick:this.set('src',id)})),
+      srcIsUrl:s.src==='url',srcIsPhotos:s.src==='photos',srcIsPrompt:s.src==='prompt',
+      url:s.url,onUrl:e=>this.setState({url:e.target.value}),
+      prompt:s.prompt,onPrompt:e=>this.setState({prompt:e.target.value}),
+      goals:['Conversions','Traffic','Awareness','Retargeting'].map(x=>({label:x,style:chip(s.goal===x),onPick:this.set('goal',x)})),
+      durations:['6s','15s','30s'].map(x=>({label:x,style:segOpt(s.dur===x),onPick:this.set('dur',x)})),
+      ratios:['9:16','1:1','16:9'].map(x=>({label:x,style:segOpt(s.ratio===x),onPick:this.set('ratio',x)})),
+      avatarToggle:{marginLeft:'auto',width:46,height:26,flex:'none',border:'1px solid '+(s.avatar?ACC:'rgba(29,31,32,.25)'),background:s.avatar?'rgba(89,128,166,.18)':'transparent',display:'flex',alignItems:'center',padding:2,cursor:'pointer'},
+      avatarKnob:{width:20,height:20,background:s.avatar?ACC:'rgba(29,31,32,.3)',marginLeft:s.avatar?'auto':0},
+      toggleAvatar:()=>this.setState({avatar:!s.avatar}),
+      estimate:s.dur==='30s'?'~90s to assemble · 5 scenes':'~60s to assemble · 5 scenes',
+
+      progress:s.progress,etaLabel:s.progress<100?(Math.ceil((100-s.progress)*0.6))+'s left':'done',
+      progressBar:{height:2,width:s.progress+'%',background:'#f2f2f3'},
+      steps:[['Reading product page','7 images'],['Writing script','3 hooks'],['Generating scenes','5 of 5'],['Voicing — Nora','96 wpm'],['Matching music','96 BPM']].map(([label,note],i)=>{
+        const done=s.progress>(i+1)*20, active=!done&&s.progress>i*20;
+        return {label,note,style:{display:'flex',alignItems:'center',gap:10,opacity:done?.55:active?1:.3},
+          markStyle:{width:16,height:16,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:9,border:'1px solid currentColor',background:done?'#f2f2f3':'transparent',color:done?DEEP:'#f2f2f3'},
+          mark:done?'✓':active?'·':''};
+      }),
+
+      sceneNo:scene,sceneKind:['PRODUCT MACRO','LIFESTYLE','DEMO','PROOF','PRICE CARD'][scene-1],
+      timecode:tc(t),playing:s.playing,playGlyph:s.playing?'❙❙':'▶',
+      togglePlay:()=>this.setState({playing:!s.playing}),
+      playBtn:{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:56,height:56,border:'1px solid rgba(242,242,243,.7)',color:'#f2f2f3',display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,cursor:'pointer',background:'rgba(29,45,61,.35)'},
+      avatarOn:s.avatar,
+      selectionBox:{position:'absolute',left:16,right:16,bottom:20,height:s.layer==='caption'?74:0,border:s.layer==='caption'?'1px dashed rgba(242,242,243,.7)':'none'},
+      captionText:capText,captionBox:capBox,
+      onScrub:e=>{const r=e.currentTarget.getBoundingClientRect();this.setState({t:Math.max(0,Math.min(dur,((e.clientX-r.left-74)/(r.width-74))*dur))})},
+      ticks:[0,3,6,9,12,15].map(x=>({label:'0:'+String(x).padStart(2,'0')})),
+      layers,
+      playhead:{position:'absolute',left:'calc(74px + (100% - 74px) * '+(t/dur)+')',top:14,bottom:0,width:1,background:ACC,pointerEvents:'none'},
+      tools:[['props','PROPERTIES'],['text','TEXT'],['audio','AUDIO']].map(([id,label])=>({label,
+        style:{flex:1,textAlign:'center',padding:'11px 4px',fontSize:11.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.09em',cursor:'pointer',color:s.tool===id?'#f2f2f3':INK,background:s.tool===id?ACC:'transparent'},onPick:this.set('tool',id)})),
+      toolIsProps:s.tool==='props',toolIsText:s.tool==='text',toolIsAudio:s.tool==='audio',
+      selectedLayerName:selLayer.name,selectedLayerMeta:selLayer.meta,props,
+      addKey:()=>this.setState({t:Math.round(t*10)/10}),
+      regenLabel:s.layer==='scene'?'REGENERATE SCENE':'RESET LAYER',regenScene:this.set('screen','generating'),
+      selectedNote:{scene:'Generated from image 3 of the product page. Regenerating keeps the timing and swaps the footage.',avatar:'Presenter delivers the hook line only, then cuts away to the product.',caption:'Four keyframes: entry, hold, emphasis on “12 hours”, exit.',logo:'Fades in over the price card and holds to the end.',audio:'Voice ducks the music by 9 dB automatically.'}[s.layer],
+      capStyles:['Kinetic','Subtitle','Boxed','Minimal'].map(x=>({label:x,style:chip(s.cap===x),onPick:this.set('cap',x)})),
+      lines:scriptLines.map(([tcv,text],i)=>({tc:tcv,text,style:{display:'flex',gap:9,alignItems:'baseline',padding:'7px 6px',cursor:'pointer',background:s.line===i?'rgba(89,128,166,.14)':'transparent',borderLeft:'2px solid '+(s.line===i?ACC:'transparent')},onSelect:this.set('line',i)})),
+      voices:[['Nora','Warm, mid-pace, EU English'],['Iver','Low, deliberate, Nordic'],['Sana','Bright, quick, urban']].map(([name,desc],i)=>({name,desc,
+        style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(s.voice===name?ACC:'rgba(29,31,32,.16)'),background:s.voice===name?'rgba(89,128,166,.1)':'transparent'},
+        onPick:this.set('voice',name),
+        bars:[6,14,9,20,11,17,7].map((h,j)=>({style:{width:2,height:h+(i*2)%5,background:s.voice===name?ACC:'rgba(29,31,32,.3)'}}))})),
+
+      exportRatios:[['9:16','Reels / TikTok',9/16],['4:5','Feed',4/5],['1:1','Square',1],['16:9','YouTube',16/9]].map(([label,platform,ar])=>{
+        const on=s.expRatios.includes(label);
+        return {label,platform,onPick:()=>this.setState({expRatios:on?s.expRatios.filter(x=>x!==label):s.expRatios.concat(label)}),
+          boxStyle:{width:'100%',aspectRatio:String(ar),border:'1px solid '+(on?ACC:'rgba(29,31,32,.2)'),background:on?'rgba(89,128,166,.2)':'transparent',position:'relative',cursor:'pointer'}};
+      }),
+      hooks:[['A','Problem first','“Most flasks give up by nine.”'],['B','Proof first','“12 hours hot — measured.”'],['C','Price first','“€38, and the last flask you buy.”']].map(([id,title,line])=>{
+        const on=s.hooks.includes(id);
+        return {title:id+' — '+title,line,mark:on?'✓':'',
+          style:{display:'flex',alignItems:'center',gap:11,padding:10,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)')},
+          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
+          onPick:()=>this.setState({hooks:on?s.hooks.filter(x=>x!==id):s.hooks.concat(id)})};
+      }),
+      renderCount:(s.expRatios.length*s.hooks.length)+' files',
+      renderTime:Math.max(1,Math.round(s.expRatios.length*s.hooks.length*0.7))+' min',
+
+      stats:[['Thumb-stop','41%','+9 pts vs A'],['CTR','2.8%','+0.7'],['Cost / purchase','€9.40','−28%']].map(([label,value,delta])=>({label,value,delta})),
+      retention:[100,94,88,71,66,62,58,55,49,44,38,31].map(v=>({style:{flex:1,height:v+'%',background:v>60?ACC:'rgba(89,128,166,.35)'}})),
+      variantRows:[['B','Proof first','2.8%','€9.40'],['A','Problem first','2.1%','€13.10'],['C','Price first','1.6%','€15.80']].map(([id,hook,ctr,cpp])=>({id,hook,ctr,cpp})),
+      sceneRows:[['Cold open','Lid macro',0.4,'0:00'],['Problem','Held outdoors',0.9,'0:03'],['Demo','Steam off the top',3.1,'0:06'],['Proof','Interior macro',1.2,'0:10'],['Price card','Podium + €38',2.4,'0:13']]
+        .map(([title,shot,drop,tc],i)=>{
+          const worst=drop>2.5;
+          return {title,shot,tc,dropLabel:'−'+drop.toFixed(1)+' pts/s',
+            style:{display:'flex',alignItems:'center',gap:10,padding:'9px 8px',cursor:'pointer',borderBottom:'1px solid rgba(29,31,32,.08)',background:worst?'rgba(89,128,166,.1)':'transparent'},
+            thumbStyle:{width:30,height:40,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("'+SHOTS[i]+'")',backgroundSize:'cover',backgroundPosition:'center'},
+            barStyle:{height:4,width:Math.min(100,drop/3.1*100)+'%',background:worst?ACC:'rgba(89,128,166,.35)'},
+            dropStyle:{width:64,flex:'none',textAlign:'right',fontFamily:'"Barlow Condensed",sans-serif',fontSize:13,color:worst?'#41617f':INK},
+            onPick:()=>this.setState({screen:'editor',clip:i,t:+([0,3,6,10,13][i]+0.4).toFixed(1),tlMode:'strip'})};
+        }),
+
+      varLayers:layerDefs.map(l=>({name:l.name,track:{flex:1,height:24,position:'relative',border:'1px solid rgba(29,31,32,.16)'},
+        fill:{position:'absolute',top:0,bottom:0,left:(l.start*100)+'%',width:(l.len*100)+'%',background:'rgba(89,128,166,.18)',borderLeft:'2px solid '+ACC}})),
+      varScenes:[['0:00','Cold open','Product macro, frost'],['0:03','Problem','Avatar to camera'],['0:06','Demo','Pour, steam rising'],['0:10','Price card','Logo + €38']].map(([tcv,title,note],i)=>({tc:tcv,title,note,
+        row:{display:'flex',gap:9,alignItems:'center',padding:'8px 4px',borderBottom:i<3?'1px solid rgba(29,31,32,.1)':'none',background:i===1?'rgba(89,128,166,.1)':'transparent'}}))
+    };
+  }
+}
+</script>
+</body>
+</html>
