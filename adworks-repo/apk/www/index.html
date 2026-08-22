@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <script>window.ADWORKS_API_BASE_URL="https://adworks-ai-proxy.onrender.com";window.claude=window.claude||{};window.claude.complete=async function(opts){var p=(opts&&opts.messages&&opts.messages[0]&&opts.messages[0].content)||'';var base=(window.ADWORKS_API_BASE_URL||'').replace(/\/$/,'');if(!base)throw new Error('AI backend not configured (ADWORKS_API_BASE_URL is empty)');var r=await fetch(base+'/generate-ad-script',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({prompt:p})});if(!r.ok)throw new Error('AI backend HTTP '+r.status);var d=await r.json();return d.raw;};</script>
   <title>Bundled Page</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
