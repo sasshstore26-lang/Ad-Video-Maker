@@ -1,0 +1,16 @@
+{
+    "name": "adworks-ai-proxy",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Tiny backend proxy that holds the Anthropic API key server-side and answers the Adworks app's ad-script generation calls. Never ship the API key inside the Android app itself.",
+    "type": "commonjs",
+    "main": "index.js",
+    "scripts": {
+          "start": "node index.js"
+    },
+    "dependencies": {
+          "@anthropic-ai/sdk": "^0.32.1",
+          "cors": "^2.8.5",
+          "express": "^4.19.2"
+    }
+}
