@@ -13,20 +13,20 @@
 <link rel="stylesheet" href="_ds/industry-3f5f3dcb-e56b-4256-9a63-0b24062c2492/styles.css">
 <script src="_ds/industry-3f5f3dcb-e56b-4256-9a63-0b24062c2492/_ds_bundle.js"></script>
 <style>
-body{margin:0;background:#f2f2f3}
-.pgrid{background-image:linear-gradient(to right,rgba(29,31,32,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(29,31,32,.05) 1px,transparent 1px);background-size:34px 34px}
+body{margin:0;background:#0b0c10}
+.pgrid{background-image:linear-gradient(to right,rgba(232,233,236,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(232,233,236,.05) 1px,transparent 1px);background-size:34px 34px}
 .hatch{background-image:repeating-linear-gradient(135deg,rgba(89,128,166,.55) 0 1px,transparent 1px 7px)}
 .hatch-lt{background-image:repeating-linear-gradient(135deg,rgba(89,128,166,.32) 0 1px,transparent 1px 6px)}
-.dv-turn{padding:40px 48px 34px;border-top:1px solid rgba(29,31,32,.12)}
+.dv-turn{padding:40px 48px 34px;border-top:1px solid rgba(232,233,236,.12)}
 .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
 .dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1d1f20;color:#f2f2f3;text-decoration:none}
 .dv-tname{font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.02em}
 .dv-opts{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start}
 .dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
-.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(29,31,32,.09);color:#1d1f20;text-decoration:none}
-.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11.5px/1.35 Barlow,sans-serif;color:rgba(29,31,32,.6);max-width:340px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(232,233,236,.09);color:#1d1f20;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11.5px/1.35 Barlow,sans-serif;color:rgba(232,233,236,.6);max-width:340px}
 .dv-opt:target .dv-oid{background:#5980a6;color:#f2f2f3}
-.dv-next{margin:24px 0 0;font:12px/1.5 Barlow,sans-serif;color:rgba(29,31,32,.55)}
+.dv-next{margin:24px 0 0;font:12px/1.5 Barlow,sans-serif;color:rgba(232,233,236,.55)}
 </style>
 </helmet>
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1d2d3d"/><rect x="60" y="60" width="80" height="80" fill="none" stroke="#94bce3" stroke-width="3"/><path d="M88 82 L124 100 L88 118 Z" fill="#94bce3"/></svg></template>
@@ -339,7 +339,7 @@ body{margin:0;background:#f2f2f3}
 
             <div style="background:var(--color-accent-900);position:relative;display:flex;align-items:flex-end;justify-content:center;height:300px;overflow:hidden">
               <div style="{{ sceneImg }}"></div>
-              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(29,45,61,.72),rgba(29,45,61,.05) 45%)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,23,16,.72),rgba(42,23,16,.05) 45%)"></div>
               <div style="position:absolute;top:11px;left:14px;font-size:9.5px;letter-spacing:.1em;color:var(--color-bg);opacity:.85">SCENE {{ sceneNo }}/5 &mdash; {{ sceneKind }}</div>
               <div style="position:absolute;top:11px;right:14px;font-family:var(--font-heading);font-size:13px;color:var(--color-bg)">{{ timecode }}</div>
               <sc-if value="{{ avatarOn }}" hint-placeholder-val="{{ true }}">
@@ -886,7 +886,7 @@ body{margin:0;background:#f2f2f3}
                     <div style="font-size:11.5px;opacity:.65;margin-top:3px;line-height:1.4">{{ g.note }}</div>
                     <div style="display:flex;flex-direction:column;gap:6px;margin-top:11px">
                       <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="4">
-                        <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;padding-bottom:6px;border-bottom:1px solid rgba(29,31,32,.08)">
+                        <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;padding-bottom:6px;border-bottom:1px solid rgba(232,233,236,.08)">
                           <span style="width:9px;height:9px;flex:none;border:1px solid var(--color-accent);transform:rotate(45deg)"></span>
                           <span>{{ i.text }}</span>
                           <span style="margin-left:auto;font-size:10px;opacity:.4;letter-spacing:.08em">EDIT</span>
@@ -905,8 +905,8 @@ body{margin:0;background:#f2f2f3}
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Adworks&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showMarks&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
-const ACC='#5980a6', DEEP='#1d2d3d', INK='#1d1f20';
-const chip=(on,extra)=>Object.assign({padding:'7px 11px',fontSize:12,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.04em',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?ACC:'transparent',color:on?'#f2f2f3':INK},extra||{});
+const ACC='#ff6a3d', DEEP='#2a1710', INK='#e8e9ec';
+const chip=(on,extra)=>Object.assign({padding:'7px 11px',fontSize:12,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.04em',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?ACC:'transparent',color:on?'#f2f2f3':INK},extra||{});
 const segOpt=(on)=>({flex:1,textAlign:'center',padding:'9px 4px',fontSize:12.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.04em',cursor:'pointer',background:on?ACC:'transparent',color:on?'#f2f2f3':INK,borderRight:'0'});
 
 const SHOTS=['assets/shot-1-lid.jpeg','assets/shot-2-hand.jpeg','assets/shot-3-steam.jpeg','assets/shot-4-interior.jpeg','assets/shot-5-podium.jpeg'];
@@ -959,11 +959,11 @@ class Component extends DCLogic {
     const layers=layerDefs.map(l=>{
       const on=s.layer===l.id;
       return {name:l.name,meta:l.meta,
-        labelStyle:{width:70,flex:'none',fontSize:9,letterSpacing:'.07em',textTransform:'uppercase',lineHeight:'24px',padding:'0 5px',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.14)':'transparent',color:INK,whiteSpace:'nowrap',overflow:'hidden'},
-        trackStyle:{flex:1,height:24,position:'relative',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),cursor:'pointer',overflow:'hidden'},
-        fillStyle:{position:'absolute',top:0,bottom:0,left:(l.start*100)+'%',width:(l.len*100)+'%',background:on?'rgba(89,128,166,.22)':'rgba(29,31,32,.05)',borderLeft:'2px solid '+(on?ACC:'rgba(29,31,32,.25)')},
+        labelStyle:{width:70,flex:'none',fontSize:9,letterSpacing:'.07em',textTransform:'uppercase',lineHeight:'24px',padding:'0 5px',cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?'rgba(89,128,166,.14)':'transparent',color:INK,whiteSpace:'nowrap',overflow:'hidden'},
+        trackStyle:{flex:1,height:24,position:'relative',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),cursor:'pointer',overflow:'hidden'},
+        fillStyle:{position:'absolute',top:0,bottom:0,left:(l.start*100)+'%',width:(l.len*100)+'%',background:on?'rgba(89,128,166,.22)':'rgba(232,233,236,.05)',borderLeft:'2px solid '+(on?ACC:'rgba(232,233,236,.25)')},
         onSelect:this.set('layer',l.id),
-        keys:l.keys.map((k,i)=>({style:{position:'absolute',left:'calc('+(k*100)+'% - 6px)',top:6,width:12,height:12,transform:'rotate(45deg)',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'#f2f2f3',cursor:'ew-resize',touchAction:'none'},
+        keys:l.keys.map((k,i)=>({style:{position:'absolute',left:'calc('+(k*100)+'% - 6px)',top:6,width:12,height:12,transform:'rotate(45deg)',border:'1px solid '+(on?ACC:'rgba(232,233,236,.3)'),background:on?ACC:'#f2f2f3',cursor:'ew-resize',touchAction:'none'},
           onPointerDown:this.keyDown(l.id,i),onPointerMove:this.keyMove,onPointerUp:this.keyUp}))};
     });
     const selLayer=layerDefs.find(l=>l.id===s.layer)||layerDefs[2];
@@ -974,13 +974,13 @@ class Component extends DCLogic {
       return {name:p.name,value:p.v,
         fill:{position:'absolute',left:0,top:0,bottom:0,width:(frac*100)+'%',background:ACC},
         knob:{position:'absolute',left:'calc('+(frac*100)+'% - 6px)',top:-5,width:12,height:12,background:'#f2f2f3',border:'1px solid '+ACC},
-        diamond:{width:11,height:11,flex:'none',transform:'rotate(45deg)',border:'1px solid '+(i<2?ACC:'rgba(29,31,32,.28)'),background:i<2?ACC:'transparent',cursor:'pointer'}};
+        diamond:{width:11,height:11,flex:'none',transform:'rotate(45deg)',border:'1px solid '+(i<2?ACC:'rgba(232,233,236,.28)'),background:i<2?ACC:'transparent',cursor:'pointer'}};
     });
 
     const capText=s.aiCaption||({Kinetic:'KEEPS COFFEE HOT FOR 12 HOURS',Subtitle:'Keeps coffee hot for 12 hours',Boxed:'12 HOURS HOT',Minimal:'12 hours hot'}[s.cap]);
     const capBase={display:'inline-block',fontFamily:'"Barlow Condensed",sans-serif',color:'#f2f2f3',textWrap:'balance'};
     const capBox={Kinetic:{...capBase,fontSize:29,lineHeight:1.02,letterSpacing:'.01em',textShadow:'0 2px 10px rgba(0,0,0,.5)'},
-      Subtitle:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:17,background:'rgba(29,45,61,.75)',padding:'5px 10px'},
+      Subtitle:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:17,background:'rgba(42,23,16,.75)',padding:'5px 10px'},
       Boxed:{...capBase,fontSize:26,background:ACC,padding:'6px 12px'},
       Minimal:{...capBase,fontFamily:'Barlow,sans-serif',fontSize:15,letterSpacing:'.14em',textTransform:'uppercase',opacity:.9}}[s.cap];
 
@@ -993,7 +993,7 @@ class Component extends DCLogic {
       logoImg:{position:'absolute',inset:0,backgroundImage:'url("assets/app-mark.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
       genStill:{height:150,margin:'22px 0 0',position:'relative',backgroundImage:'url("assets/shot-3-steam.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
       footageGrid:SHOTS.concat(['assets/shot-2-hand.jpeg','assets/shot-3-steam.jpeg']).slice(0,7).map(p=>({style:{aspectRatio:'1',backgroundImage:'url("'+p+'")',backgroundSize:'cover',backgroundPosition:'center'}})),
-      heroThumb:{width:50,height:50,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("assets/shot-5-podium.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+      heroThumb:{width:50,height:50,flex:'none',border:'1px solid rgba(232,233,236,.16)',backgroundImage:'url("assets/shot-5-podium.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
       faults:[['none','Happy path'],['firstRun','First run — empty'],['urlError','URL unreadable'],['renderFail','Render failed'],['disconnected','Account disconnected']]
         .map(([id,label])=>({label,style:chip(s.fault===id,{fontSize:11,padding:'5px 8px'}),onPick:()=>this.setState({fault:id,screen:id==='firstRun'?'home':id==='urlError'?'create':id==='renderFail'?'export':id==='disconnected'?'publish':s.screen})})),
       isFirstRun:s.fault==='firstRun',isUrlError:s.fault==='urlError',isRenderFail:s.fault==='renderFail',isDisconnected:s.fault==='disconnected',
@@ -1012,33 +1012,33 @@ class Component extends DCLogic {
         .map(([name,role,meta,own])=>{
           const on=s.workspace===name;
           return {name,role,meta,onPick:this.set('workspace',name),
-            style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
-            markStyle:{width:26,height:26,flex:'none',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),position:'relative',background:own?ACC:'transparent'}};
+            style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+            markStyle:{width:26,height:26,flex:'none',border:'1px solid '+(on?ACC:'rgba(232,233,236,.3)'),position:'relative',background:own?ACC:'transparent'}};
         }),
       seats:[['Mari H.','Owner','Everything, including billing'],['Jonas P.','Editor','Create and edit, cannot publish'],['Bike Club','Reviewer','Comments and approvals only'],['+ Invite','','Editor or reviewer, per workspace']]
         .map(([name,role,scope])=>({name,role,scope,
-          style:{display:'flex',alignItems:'center',gap:10,padding:'9px 2px',borderBottom:'1px solid rgba(29,31,32,.08)',fontSize:12.5,cursor:'pointer'},
-          roleStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',textTransform:'uppercase',color:role==='Owner'?'#41617f':'rgba(29,31,32,.5)'}})),
+          style:{display:'flex',alignItems:'center',gap:10,padding:'9px 2px',borderBottom:'1px solid rgba(232,233,236,.08)',fontSize:12.5,cursor:'pointer'},
+          roleStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',textTransform:'uppercase',color:role==='Owner'?'#41617f':'rgba(232,233,236,.5)'}})),
       approvals:[['Bike Club — winter promo','Waiting on client · 2 days','shot-2-hand',true],['Fjell Coffee — bag refresh','Changes requested: swap the hook','shot-3-steam',false]]
         .map(([title,note,img,pending])=>({title,note,pending,
-          thumbStyle:{width:44,height:58,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("assets/'+img+'.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
-          tagStyle:{fontSize:9.5,letterSpacing:'.08em',padding:'3px 8px',border:'1px solid '+(pending?ACC:'rgba(29,31,32,.25)'),color:pending?'#41617f':'rgba(29,31,32,.6)'},
+          thumbStyle:{width:44,height:58,flex:'none',border:'1px solid rgba(232,233,236,.16)',backgroundImage:'url("assets/'+img+'.jpeg")',backgroundSize:'cover',backgroundPosition:'center'},
+          tagStyle:{fontSize:9.5,letterSpacing:'.08em',padding:'3px 8px',border:'1px solid '+(pending?ACC:'rgba(232,233,236,.25)'),color:pending?'#41617f':'rgba(232,233,236,.6)'},
           tagLabel:pending?'PENDING':'CHANGES',
           onOpen:this.set('screen','editor')})),
-      tlModes:[['stack','LAYERS'],['strip','FILMSTRIP']].map(([id,label])=>({label,style:{padding:'4px 8px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.tlMode===id?ACC:'rgba(29,31,32,.16)'),background:s.tlMode===id?ACC:'transparent',color:s.tlMode===id?'#f2f2f3':INK},onPick:this.set('tlMode',id)})),
+      tlModes:[['stack','LAYERS'],['strip','FILMSTRIP']].map(([id,label])=>({label,style:{padding:'4px 8px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.tlMode===id?ACC:'rgba(232,233,236,.16)'),background:s.tlMode===id?ACC:'transparent',color:s.tlMode===id?'#f2f2f3':INK},onPick:this.set('tlMode',id)})),
       tlIsStack:s.tlMode==='stack',tlIsStrip:s.tlMode==='strip',
       stripTotal:dur.toFixed(1)+'s total',
       strip:['Cold open','Problem','Demo','Proof','Price card'].map((label,i)=>{
         const len=s.clipLens[i], on=s.clip===i, st=s.clipLens.slice(0,i).reduce((a,b)=>a+b,0);
         return {label,durLabel:len.toFixed(1)+'s',
           imgStyle:{position:'absolute',inset:0,backgroundImage:'url("'+SHOTS[i]+'")',backgroundSize:'cover',backgroundPosition:'center',opacity:on?1:.6},
-          style:{flex:len,height:58,position:'relative',cursor:'pointer',display:'flex',flexDirection:'column',overflow:'hidden',minWidth:0,border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),borderLeftWidth:on?3:1},
-          handleStyle:{position:'absolute',right:0,top:0,bottom:0,width:12,cursor:'ew-resize',touchAction:'none',borderRight:'3px solid '+(on?ACC:'rgba(29,31,32,.3)')},
+          style:{flex:len,height:58,position:'relative',cursor:'pointer',display:'flex',flexDirection:'column',overflow:'hidden',minWidth:0,border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),borderLeftWidth:on?3:1},
+          handleStyle:{position:'absolute',right:0,top:0,bottom:0,width:12,cursor:'ew-resize',touchAction:'none',borderRight:'3px solid '+(on?ACC:'rgba(232,233,236,.3)')},
           onPointerDown:this.trimDown(i),onPointerMove:this.trimMove,onPointerUp:this.trimUp,
           onSelect:()=>this.setState({clip:i,t:+(st+0.4).toFixed(1)})};
       }),
       stripChips:[['caption','CAPTION'],['avatar','AVATAR'],['logo','LOGO'],['audio','VO + MUSIC']].map(([id,label])=>({label,
-        style:{padding:'5px 10px',fontSize:10,letterSpacing:'.06em',fontFamily:'"Barlow Condensed",sans-serif',cursor:'pointer',border:'1px solid '+(s.layer===id?ACC:'rgba(29,31,32,.16)'),background:s.layer===id?'rgba(89,128,166,.14)':'transparent'},onPick:this.set('layer',id)})),
+        style:{padding:'5px 10px',fontSize:10,letterSpacing:'.06em',fontFamily:'"Barlow Condensed",sans-serif',cursor:'pointer',border:'1px solid '+(s.layer===id?ACC:'rgba(232,233,236,.16)'),background:s.layer===id?'rgba(89,128,166,.14)':'transparent'},onPick:this.set('layer',id)})),
       assetGroups:[['Brand kit','Logo, palette, type and the tone of voice every ad inherits.',['Nordvik logo — SVG','Steel / paper palette','Barlow Condensed + Barlow','Tone: plain-spoken']],
                    ['Footage','Clips and stills you uploaded, plus scenes we generated.',['12 product stills','5 generated scenes','2 phone clips','B-roll: winter, cycling']],
                    ['Voice & music','Approved voices and licensed tracks.',['Nora — house voice','Iver, Sana','Cold Front — percussive','3 more tracks']]]
@@ -1047,9 +1047,9 @@ class Component extends DCLogic {
       channels:[['Meta','Instagram Reels + Facebook feed','connected'],['TikTok','Ads Manager · Nordvik AB','connected'],['YouTube','Shorts','connect'],['Download','Files on this phone','ready']].map(([name,desc,st])=>{
         const on=s.channels.includes(name), needs=st==='connect'&&!s.connected.includes(name);
         return {name,desc:needs?desc:(s.connected.includes(name)?'Brand account · Nordvik AB':desc),state:needs?'CONNECT':on?'SELECTED':'OFF',
-          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
-          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
-          mark:on?'✓':'',tagStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',color:st==='connect'?ACC:'rgba(29,31,32,.5)'},
+          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(232,233,236,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
+          mark:on?'✓':'',tagStyle:{marginLeft:'auto',fontSize:9.5,letterSpacing:'.08em',color:st==='connect'?ACC:'rgba(232,233,236,.5)'},
           onPick:()=>needs?this.setState({connectFor:name,connectStep:0})
             :this.setState({channels:on?s.channels.filter(x=>x!==name):s.channels.concat(name)})};
       }),
@@ -1061,8 +1061,8 @@ class Component extends DCLogic {
       adAccounts:[['Nordvik AB — main','act_884120','€2,140 spent · 30d'],['Nordvik AB — test','act_884121','€0 spent · 30d'],['Bike Club (agency)','act_771904','€612 spent · 30d']].map(([name,id,meta])=>{
         const on=s.adAccount===name;
         return {name,id,meta,onPick:this.set('adAccount',name),
-          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
-          dotStyle:{width:14,height:14,flex:'none',borderRadius:'50%',border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),boxShadow:on?'inset 0 0 0 3px #f2f2f3':'none',background:on?ACC:'transparent'}};
+          style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?'rgba(89,128,166,.1)':'transparent'},
+          dotStyle:{width:14,height:14,flex:'none',borderRadius:'50%',border:'1px solid '+(on?ACC:'rgba(232,233,236,.3)'),boxShadow:on?'inset 0 0 0 3px #f2f2f3':'none',background:on?ACC:'transparent'}};
       }),
       connectCta:s.connectStep===0?'ALLOW ACCESS':s.connectStep===1?'USE THIS ACCOUNT':'DONE',
       connectNext:()=>{if(s.connectStep<2)this.setState({connectStep:s.connectStep+1});
@@ -1078,7 +1078,7 @@ class Component extends DCLogic {
         .map(([name,price,line,feats])=>{
           const on=s.plan===name;
           return {name,price,line,onPick:this.set('plan',name),
-            style:{padding:14,cursor:'pointer',position:'relative',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)'),background:on?'rgba(89,128,166,.08)':'transparent'},
+            style:{padding:14,cursor:'pointer',position:'relative',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)'),background:on?'rgba(89,128,166,.08)':'transparent'},
             nameStyle:{fontFamily:'"Barlow Condensed",sans-serif',fontSize:19,color:on?'#41617f':INK},
             feats:feats.map(f=>({text:f}))};
         }),
@@ -1096,7 +1096,7 @@ class Component extends DCLogic {
           onOpen:this.set('screen','editor')})),
       liveAds:[['Flask — B','€212','€9.40','best'],['Flask — A','€188','€13.10',''],['Gloves — A','€96','€11.80','']]
         .map(([name,spend,cpp,flag])=>({name,spend,cpp,
-          style:{display:'flex',alignItems:'center',gap:9,padding:'7px 0',borderBottom:'1px solid rgba(29,31,32,.08)',cursor:'pointer',fontSize:12.5},
+          style:{display:'flex',alignItems:'center',gap:9,padding:'7px 0',borderBottom:'1px solid rgba(232,233,236,.08)',cursor:'pointer',fontSize:12.5},
           nameStyle:{fontFamily:'"Barlow Condensed",sans-serif',fontSize:14,color:flag?'#41617f':INK},
           cppStyle:{marginLeft:'auto',fontFamily:'"Barlow Condensed",sans-serif',fontSize:14,color:flag?ACC:INK},
           onOpen:this.set('screen','analytics')})),
@@ -1106,14 +1106,14 @@ class Component extends DCLogic {
         onPick:i===1?this.set('screen','create'):i===2?this.set('screen','assets'):this.set('screen','home')})),
 
       createModes:[['sheet','ONE SHEET'],['interview','INTERVIEW']].map(([id,label])=>({label,
-        style:{padding:'5px 9px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.createMode===id?ACC:'rgba(29,31,32,.16)'),background:s.createMode===id?ACC:'transparent',color:s.createMode===id?'#f2f2f3':INK},onPick:this.set('createMode',id)})),
+        style:{padding:'5px 9px',fontSize:9.5,fontFamily:'"Barlow Condensed",sans-serif',letterSpacing:'.08em',cursor:'pointer',border:'1px solid '+(s.createMode===id?ACC:'rgba(232,233,236,.16)'),background:s.createMode===id?ACC:'transparent',color:s.createMode===id?'#f2f2f3':INK},onPick:this.set('createMode',id)})),
       modeIsSheet:s.createMode==='sheet',modeIsInterview:s.createMode==='interview',
       iq:(()=>{const qs=[['What are we advertising?','Nordvik Thermal Flask 750ml — insulated steel, one-hand lid, €38.'],
         ['Who is buying it, and what stops them?','Winter commuters on bikes. They think €38 is a lot for a flask.'],
         ['What is the one promise?','Coffee still hot 12 hours later — measured, not claimed.'],
         ['What proof can we show?','412 reviews at 4.8, and a pour shot with steam at hour twelve.']][s.iStep];
         return {n:'0'+(s.iStep+1),of:'/ 04',q:qs[0],a:qs[1]}})(),
-      iBars:[0,1,2,3].map(i=>({style:{flex:1,height:2,background:i<=s.iStep?ACC:'rgba(29,31,32,.16)'}})),
+      iBars:[0,1,2,3].map(i=>({style:{flex:1,height:2,background:i<=s.iStep?ACC:'rgba(232,233,236,.16)'}})),
       iNext:()=>s.iStep<3?this.setState({iStep:s.iStep+1}):this.runGen(),
       iBack:()=>s.iStep>0?this.setState({iStep:s.iStep-1}):this.setState({createMode:'sheet'}),
       iNextLabel:s.iStep<3?'NEXT':'WRITE THE SCRIPT',
@@ -1124,8 +1124,8 @@ class Component extends DCLogic {
       goals:['Conversions','Traffic','Awareness','Retargeting'].map(x=>({label:x,style:chip(s.goal===x),onPick:this.set('goal',x)})),
       durations:['6s','15s','30s'].map(x=>({label:x,style:segOpt(s.dur===x),onPick:this.set('dur',x)})),
       ratios:['9:16','1:1','16:9'].map(x=>({label:x,style:segOpt(s.ratio===x),onPick:this.set('ratio',x)})),
-      avatarToggle:{marginLeft:'auto',width:46,height:26,flex:'none',border:'1px solid '+(s.avatar?ACC:'rgba(29,31,32,.25)'),background:s.avatar?'rgba(89,128,166,.18)':'transparent',display:'flex',alignItems:'center',padding:2,cursor:'pointer'},
-      avatarKnob:{width:20,height:20,background:s.avatar?ACC:'rgba(29,31,32,.3)',marginLeft:s.avatar?'auto':0},
+      avatarToggle:{marginLeft:'auto',width:46,height:26,flex:'none',border:'1px solid '+(s.avatar?ACC:'rgba(232,233,236,.25)'),background:s.avatar?'rgba(89,128,166,.18)':'transparent',display:'flex',alignItems:'center',padding:2,cursor:'pointer'},
+      avatarKnob:{width:20,height:20,background:s.avatar?ACC:'rgba(232,233,236,.3)',marginLeft:s.avatar?'auto':0},
       toggleAvatar:()=>this.setState({avatar:!s.avatar}),
       estimate:s.dur==='30s'?'~90s to assemble · 5 scenes':'~60s to assemble · 5 scenes',
 
@@ -1141,7 +1141,7 @@ class Component extends DCLogic {
       sceneNo:scene,sceneKind:['PRODUCT MACRO','LIFESTYLE','DEMO','PROOF','PRICE CARD'][scene-1],
       timecode:tc(t),playing:s.playing,playGlyph:s.playing?'❙❙':'▶',
       togglePlay:()=>this.setState({playing:!s.playing}),
-      playBtn:{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:56,height:56,border:'1px solid rgba(242,242,243,.7)',color:'#f2f2f3',display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,cursor:'pointer',background:'rgba(29,45,61,.35)'},
+      playBtn:{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',width:56,height:56,border:'1px solid rgba(242,242,243,.7)',color:'#f2f2f3',display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,cursor:'pointer',background:'rgba(42,23,16,.35)'},
       avatarOn:s.avatar,
       selectionBox:{position:'absolute',left:16,right:16,bottom:20,height:s.layer==='caption'?74:0,border:s.layer==='caption'?'1px dashed rgba(242,242,243,.7)':'none'},
       captionText:capText,captionBox:capBox,
@@ -1159,20 +1159,20 @@ class Component extends DCLogic {
       capStyles:['Kinetic','Subtitle','Boxed','Minimal'].map(x=>({label:x,style:chip(s.cap===x),onPick:this.set('cap',x)})),
       lines:scriptLines.map(([tcv,text],i)=>({tc:tcv,text,style:{display:'flex',gap:9,alignItems:'baseline',padding:'7px 6px',cursor:'pointer',background:s.line===i?'rgba(89,128,166,.14)':'transparent',borderLeft:'2px solid '+(s.line===i?ACC:'transparent')},onSelect:this.set('line',i)})),
       voices:[['Nora','Warm, mid-pace, EU English'],['Iver','Low, deliberate, Nordic'],['Sana','Bright, quick, urban']].map(([name,desc],i)=>({name,desc,
-        style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(s.voice===name?ACC:'rgba(29,31,32,.16)'),background:s.voice===name?'rgba(89,128,166,.1)':'transparent'},
+        style:{display:'flex',alignItems:'center',gap:11,padding:11,cursor:'pointer',border:'1px solid '+(s.voice===name?ACC:'rgba(232,233,236,.16)'),background:s.voice===name?'rgba(89,128,166,.1)':'transparent'},
         onPick:this.set('voice',name),
-        bars:[6,14,9,20,11,17,7].map((h,j)=>({style:{width:2,height:h+(i*2)%5,background:s.voice===name?ACC:'rgba(29,31,32,.3)'}}))})),
+        bars:[6,14,9,20,11,17,7].map((h,j)=>({style:{width:2,height:h+(i*2)%5,background:s.voice===name?ACC:'rgba(232,233,236,.3)'}}))})),
 
       exportRatios:[['9:16','Reels / TikTok',9/16],['4:5','Feed',4/5],['1:1','Square',1],['16:9','YouTube',16/9]].map(([label,platform,ar])=>{
         const on=s.expRatios.includes(label);
         return {label,platform,onPick:()=>this.setState({expRatios:on?s.expRatios.filter(x=>x!==label):s.expRatios.concat(label)}),
-          boxStyle:{width:'100%',aspectRatio:String(ar),border:'1px solid '+(on?ACC:'rgba(29,31,32,.2)'),background:on?'rgba(89,128,166,.2)':'transparent',position:'relative',cursor:'pointer'}};
+          boxStyle:{width:'100%',aspectRatio:String(ar),border:'1px solid '+(on?ACC:'rgba(232,233,236,.2)'),background:on?'rgba(89,128,166,.2)':'transparent',position:'relative',cursor:'pointer'}};
       }),
       hooks:[['A','Problem first','“Most flasks give up by nine.”'],['B','Proof first','“12 hours hot — measured.”'],['C','Price first','“€38, and the last flask you buy.”']].map(([id,title,line])=>{
         const on=s.hooks.includes(id);
         return {title:id+' — '+title,line,mark:on?'✓':'',
-          style:{display:'flex',alignItems:'center',gap:11,padding:10,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(29,31,32,.16)')},
-          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(29,31,32,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
+          style:{display:'flex',alignItems:'center',gap:11,padding:10,cursor:'pointer',border:'1px solid '+(on?ACC:'rgba(232,233,236,.16)')},
+          boxStyle:{width:18,height:18,flex:'none',display:'inline-flex',alignItems:'center',justifyContent:'center',fontSize:11,border:'1px solid '+(on?ACC:'rgba(232,233,236,.3)'),background:on?ACC:'transparent',color:'#f2f2f3'},
           onPick:()=>this.setState({hooks:on?s.hooks.filter(x=>x!==id):s.hooks.concat(id)})};
       }),
       renderCount:(s.expRatios.length*s.hooks.length)+' files',
@@ -1185,17 +1185,17 @@ class Component extends DCLogic {
         .map(([title,shot,drop,tc],i)=>{
           const worst=drop>2.5;
           return {title,shot,tc,dropLabel:'−'+drop.toFixed(1)+' pts/s',
-            style:{display:'flex',alignItems:'center',gap:10,padding:'9px 8px',cursor:'pointer',borderBottom:'1px solid rgba(29,31,32,.08)',background:worst?'rgba(89,128,166,.1)':'transparent'},
-            thumbStyle:{width:30,height:40,flex:'none',border:'1px solid rgba(29,31,32,.16)',backgroundImage:'url("'+SHOTS[i]+'")',backgroundSize:'cover',backgroundPosition:'center'},
+            style:{display:'flex',alignItems:'center',gap:10,padding:'9px 8px',cursor:'pointer',borderBottom:'1px solid rgba(232,233,236,.08)',background:worst?'rgba(89,128,166,.1)':'transparent'},
+            thumbStyle:{width:30,height:40,flex:'none',border:'1px solid rgba(232,233,236,.16)',backgroundImage:'url("'+SHOTS[i]+'")',backgroundSize:'cover',backgroundPosition:'center'},
             barStyle:{height:4,width:Math.min(100,drop/3.1*100)+'%',background:worst?ACC:'rgba(89,128,166,.35)'},
             dropStyle:{width:64,flex:'none',textAlign:'right',fontFamily:'"Barlow Condensed",sans-serif',fontSize:13,color:worst?'#41617f':INK},
             onPick:()=>this.setState({screen:'editor',clip:i,t:+([0,3,6,10,13][i]+0.4).toFixed(1),tlMode:'strip'})};
         }),
 
-      varLayers:layerDefs.map(l=>({name:l.name,track:{flex:1,height:24,position:'relative',border:'1px solid rgba(29,31,32,.16)'},
+      varLayers:layerDefs.map(l=>({name:l.name,track:{flex:1,height:24,position:'relative',border:'1px solid rgba(232,233,236,.16)'},
         fill:{position:'absolute',top:0,bottom:0,left:(l.start*100)+'%',width:(l.len*100)+'%',background:'rgba(89,128,166,.18)',borderLeft:'2px solid '+ACC}})),
       varScenes:[['0:00','Cold open','Product macro, frost'],['0:03','Problem','Avatar to camera'],['0:06','Demo','Pour, steam rising'],['0:10','Price card','Logo + €38']].map(([tcv,title,note],i)=>({tc:tcv,title,note,
-        row:{display:'flex',gap:9,alignItems:'center',padding:'8px 4px',borderBottom:i<3?'1px solid rgba(29,31,32,.1)':'none',background:i===1?'rgba(89,128,166,.1)':'transparent'}}))
+        row:{display:'flex',gap:9,alignItems:'center',padding:'8px 4px',borderBottom:i<3?'1px solid rgba(232,233,236,.1)':'none',background:i===1?'rgba(89,128,166,.1)':'transparent'}}))
     };
   }
 }
