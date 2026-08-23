@@ -15,7 +15,7 @@ const cors = require("cors");
 const Anthropic = require("@anthropic-ai/sdk");
 
 const PORT = process.env.PORT || 8787;
-const API_KEY = process.env.ANTHROPIC_API_KEY;
+const API_KEY = process.env.ANTHROPIC_API_KEY;const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 if (!API_KEY) {
   console.error(
@@ -75,6 +75,6 @@ app.post("/generate-ad-script", async (req, res) => {
          }
 });
 
-app.listen(PORT, () => {
+app.post("/generate-ad-image", async (req, res) => { const ip = req.ip || req.socket.remoteAddress || "unknown"; if (rateLimited(ip)) { return res.status(429).json({ error: "Too many requests, slow down." }); } if (!OPENAI_API_KEY) { return res.status(503).json({ error: "Image generation not configured (OPENAI_API_KEY is empty)." }); } const prompt = typeof req.body?.prompt === "string" ? req.body.prompt.slice(0, 2000) : ""; if (!prompt) { return res.status(400).json({ error: "Missing 'prompt' string in request body." }); } try { const r = await fetch("https://api.openai.com/v1/images/generations", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + OPENAI_API_KEY }, body: JSON.stringify({ model: "gpt-image-1", prompt, size: "1024x1024", quality: "low", n: 1 }) }); if (!r.ok) { const errText = await r.text().catch(() => ""); console.error("OpenAI image call failed:", r.status, errText); return res.status(502).json({ error: "Image generation failed upstream." }); } const data = await r.json(); const b64 = data && data.data && data.data[0] && data.data[0].b64_json; if (!b64) { return res.status(502).json({ error: "Image generation returned no image." }); } res.json({ b64 }); } catch (err) { console.error("OpenAI image call failed:", err && err.message || err); res.status(502).json({ error: "Image generation failed upstream." }); } }); app.listen(PORT, () => {
   console.log(`Adworks AI proxy listening on :${PORT}`);
 });
