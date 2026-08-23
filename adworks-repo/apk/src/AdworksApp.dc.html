@@ -331,7 +331,7 @@ body{margin:0;background:#f2f2f3}
             <div style="display:flex;align-items:center;gap:10px;padding:6px 14px 8px">
               <button class="btn btn-secondary btn-icon" style="width:40px;height:40px" onClick="{{ goHome }}">&larr;</button>
               <div>
-                <div style="font-family:var(--font-heading);font-size:16px;line-height:1.1">Thermal Flask &mdash; cut 01</div>
+                <div style="font-family:var(--font-heading);font-size:16px;line-height:1.1">{{ editorTitle }} &mdash; cut 01</div>
                 <div style="font-size:10px;opacity:.55">saved &middot; {{ durLabel }} &middot; 9:16 &middot; 5 layers</div>
               </div>
               <button class="btn btn-primary" style="margin-left:auto;height:40px;padding:0 15px;font-size:13px" onClick="{{ goExport }}">EXPORT</button>
@@ -918,7 +918,7 @@ class Component extends DCLogic {
     tone:'Plain-spoken',progress:0,playing:false,t:6.2,layer:'caption',tool:'props',cap:'Kinetic',
     voice:'Nora',line:2,hooks:['A','B','C'],expRatios:['9:16','1:1'],prop:'Scale',
     channels:['Meta','TikTok'],schedule:'Now',budget:25,plan:'Everything',tlMode:'stack',clip:2,createMode:'sheet',iStep:1,connectFor:null,connectStep:0,connected:[],adAccount:'Nordvik AB — main',
-    clipLens:[2.6,3.4,4.2,2.4,2.4],keyMap:{avatar:[.06,.2],caption:[.1,.42,.66,.88],logo:[.76,.94]},fault:'none',workspace:'Nordvik AB'};
+    clipLens:[2.6,3.4,4.2,2.4,2.4],keyMap:{avatar:[.06,.2],caption:[.1,.42,.66,.88],logo:[.76,.94]},fault:'none',workspace:'Nordvik AB',aiTitle:''};
 
   total=()=>this.state.clipLens.reduce((a,b)=>a+b,0);
   keyDown=(id,i)=>e=>{e.stopPropagation();e.target.setPointerCapture(e.pointerId);
@@ -938,7 +938,7 @@ class Component extends DCLogic {
 
   componentWillUnmount(){clearInterval(this._iv)}
   runGen=()=>{clearInterval(this._iv);this.setState({screen:'generating',progress:0});
-    this._iv=setInterval(()=>{const p=this.state.progress+2;if(p>=100){clearInterval(this._iv);this.setState({progress:100})}else{this.setState({progress:p})}},70);const up=this.state.prompt||'';Promise.resolve().then(()=>window.claude.complete({messages:[{content:up}]})).then(txt=>{const ln=String(txt||'').replace(/#/g,'').trim();this.setState({aiCaption:ln.slice(0,60),screen:'editor'})}).catch(()=>{this.setState({screen:'editor'})})}
+    this._iv=setInterval(()=>{const p=this.state.progress+2;if(p>=100){clearInterval(this._iv);this.setState({progress:100})}else{this.setState({progress:p})}},70);const up=this.state.prompt||'';const sys='Return ONLY strict JSON like this shape: {title: your title here, caption: your caption here} using double quotes around both the keys and the string values, and nothing else (no markdown, no code fences, no commentary). title = a punchy product or campaign name, under 40 characters. caption = a punchy on-screen ad caption, under 60 characters. Base both on this ad brief: '+up;Promise.resolve().then(()=>window.claude.complete({messages:[{content:sys}]})).then(txt=>{const raw=String(txt||'');let title='',cap='';const i=raw.indexOf('{'),k=raw.lastIndexOf('}');try{const j=JSON.parse(i>-1&&k>i?raw.slice(i,k+1):raw);title=String(j.title||'').trim();cap=String(j.caption||'').trim()}catch(e){}if(!cap){cap=raw.replace(/#/g,'').trim().slice(0,60)}if(!title){title=(raw.replace(/#/g,'').trim().split('.')[0]||'New Ad Video').slice(0,40)}const projects=[[title,this.state.ratio,this.state.dur,'GENERATED','just now','assets/shot-5-podium.jpeg'],...(this.state.projects||[])];this.setState({aiCaption:cap,aiTitle:title,projects,screen:'editor'})}).catch(()=>{this.setState({screen:'editor'})})}
   set=(k,v)=>()=>this.setState({[k]:v});
 
   renderVals(){
@@ -1090,7 +1090,7 @@ class Component extends DCLogic {
       goExport:this.set('screen','export'),goAnalytics:this.set('screen','analytics'),startGenerate:this.runGen,
 
       tones:['Plain-spoken','Technical','Warm','Blunt'].map(x=>({label:x,style:chip(s.tone===x),onPick:this.set('tone',x)})),
-      projects:[['Thermal Tumbler — cut 01','9:16','0:15','LIVE · 3 VARIANTS','2h ago','assets/shot-5-podium.jpeg'],['Tumbler — commuter angle','1:1','0:20','DRAFT','yesterday','assets/shot-2-hand.jpeg'],['Lid & seal detail','9:16','0:12','RENDERING','2 days','assets/shot-1-lid.jpeg'],['Tumbler — gift angle','16:9','0:30','LIVE','5 days','assets/shot-3-steam.jpeg']]
+      editorTitle:s.aiTitle||'Thermal Flask',projects:(s.projects||[['Thermal Tumbler — cut 01','9:16','0:15','LIVE · 3 VARIANTS','2h ago','assets/shot-5-podium.jpeg'],['Tumbler — commuter angle','1:1','0:20','DRAFT','yesterday','assets/shot-2-hand.jpeg'],['Lid & seal detail','9:16','0:12','RENDERING','2 days','assets/shot-1-lid.jpeg'],['Tumbler — gift angle','16:9','0:30','LIVE','5 days','assets/shot-3-steam.jpeg']])
         .map(([title,ratio,dur2,status,when,img])=>({title,ratio,dur:dur2,status,when,
           thumbStyle:{aspectRatio:'9/16',position:'relative',display:'flex',alignItems:'flex-end',padding:8,backgroundImage:'url("'+img+'")',backgroundSize:'cover',backgroundPosition:'center'},
           onOpen:this.set('screen','editor')})),
